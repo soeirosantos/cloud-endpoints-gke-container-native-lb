@@ -14,7 +14,6 @@ spec:
         app: esp-echo
     spec:
       containers:
-      # [START esp]
       - name: esp
         image: gcr.io/endpoints-release/endpoints-runtime:1
         args: [
@@ -24,7 +23,6 @@ spec:
           "--rollout_strategy", "managed",
           "--generate_self_signed_cert"
         ]
-      # [END esp]
         ports:
           - name: esp-https
             containerPort: 8443
@@ -103,7 +101,6 @@ metadata:
   name: esp-echo
   annotations:
     kubernetes.io/ingress.global-static-ip-name: esp-echo
-  #   kubernetes.io/ingress.allow-http: "false"
 spec:
   backend:
     serviceName: esp-echo
