@@ -162,7 +162,8 @@ curl --request POST \
 Execute the same steps with the [.kube-https.yaml](.kube-https.yaml) configuration.
 Notice that you test from the `EXTERNAL_IP` still using HTTP. This is because
 when you configure the ESP container with HTTPS you are using TLS only for traffic
-from `LB -> ESP`.
+from `LB -> ESP`. Configuring TLS for your Ingress is important and something you
+should definitely do, but it's out of the scope in this tutorial.
 
 ## Troubleshooting
 
