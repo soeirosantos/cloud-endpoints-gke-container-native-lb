@@ -1,4 +1,4 @@
-# Google Cloud Endpoints in GKE wiht Container-native Load Balancing
+# Google Cloud Endpoints in GKE with Container-native Load Balancing
 
 In this experiment, we extend the [Getting started with Cloud Endpoints for GKE with ESP](https://cloud.google.com/endpoints/docs/openapi/get-started-kubernetes-engine) documentation guide to
 provide an example of how to configure HTTPS between the LB and the ESP and also
