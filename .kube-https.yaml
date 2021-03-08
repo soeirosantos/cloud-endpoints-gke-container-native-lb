@@ -83,8 +83,8 @@ metadata:
   annotations:
     # default for Services created in GKE clusters 1.17.6-gke.7 and up
     # cloud.google.com/neg: '{"ingress": true}'
-    # https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress#service_annotations_related_to_ingress
-    service.alpha.kubernetes.io/app-protocols: '{"svc-https":"HTTPS"}'
+    # https://cloud.google.com/kubernetes-engine/docs/concepts/ingress-xlb#https_tls_between_load_balancer_and_your_application
+    cloud.google.com/app-protocols: '{"svc-https":"HTTPS"}'
 spec:
   type: ClusterIP
   ports:

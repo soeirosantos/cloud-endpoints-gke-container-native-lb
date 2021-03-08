@@ -1,6 +1,6 @@
 # Google Cloud Endpoints in GKE wiht Container-native Load Balancing
 
-In this experiment, we extend the [Getting started with Cloud Endpoints for GKE with ESP with OpenAPI](https://cloud.google.com/endpoints/docs/openapi/get-started-kubernetes-engine) documentation guide to
+In this experiment, we extend the [Getting started with Cloud Endpoints for GKE with ESP](https://cloud.google.com/endpoints/docs/openapi/get-started-kubernetes-engine) documentation guide to
 provide an example of how to configure HTTPS between the LB and the ESP and also
 how to use Container-native Load Balancing. Additionally, the Open API configuration provides
 examples of how to configure different types of `securityDefinitions` using Cloud
@@ -71,7 +71,7 @@ Now upload the configuration and create a managed service.
 gcloud endpoints services deploy openapi.yaml
 ```
 
-Check the Google service enabled in your project and enable the necessary
+Check the Google services enabled in your project and enable the necessary
 services if they aren't enabled.
 
 ```bash
@@ -80,7 +80,7 @@ gcloud services list
 gcloud services enable servicemanagement.googleapis.com
 gcloud services enable servicecontrol.googleapis.com
 gcloud services enable endpoints.googleapis.com
-gcloud services enable echo-api.endpoints."$(GCP_PROJECT)".cloud.goog
+gcloud services enable echo-api.endpoints."${GCP_PROJECT}".cloud.goog
 
 ```
 
@@ -131,14 +131,16 @@ It will take several minutes until the Ingress becomes available. Wait until the
 backend service reports `HEALTHY`.
 
 ```bash
-watch "kubectl get ing/esp-echo -o jsonpath='{.metadata.annotations.ingress\.kubernetes\.io/backends}'"
+watch "kubectl get ingress esp-echo \
+  -o jsonpath='{.metadata.annotations.ingress\.kubernetes\.io/backends}'"
 ```
 
 Use the following commands to observe how the GCP Backend Service and Health Check
 get configured based on your Ingress, Service and Pod configuration.
 
 ```bash
-BACKEND_SERVICE=$(kubectl get ingress esp-echo -o jsonpath='{.metadata.annotations.ingress\.kubernetes\.io/backends}' | jq -r keys[0]
+BACKEND_SERVICE=$(kubectl get ingress esp-echo \
+  -o jsonpath='{.metadata.annotations.ingress\.kubernetes\.io/backends}' | jq -r keys[0]
 
 gcloud compute backend-services describe $BACKEND_SERVICE --global
 
@@ -159,8 +161,8 @@ curl --request POST \
 
 Execute the same steps with the [.kube-https.yaml](.kube-https.yaml) configuration.
 Notice that you test from the `EXTERNAL_IP` still using HTTP. This is because
-when you configure the ESP container with HTTPS you are encrypting traffic from
-`LB -> ESP` only.
+when you configure the ESP container with HTTPS you are using TLS only for traffic
+from `LB -> ESP`.
 
 ## References
 
@@ -169,5 +171,5 @@ These are some resources that helped me during this experiment:
 https://cloud.google.com/endpoints/docs/openapi/get-started-kubernetes-engine
 https://cloud.google.com/endpoints/docs/openapi/specify-proxy-startup-options
 https://cloud.google.com/endpoints/docs/openapi/configure-endpoints
-https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress#service_annotations_related_to_ingress
+https://cloud.google.com/kubernetes-engine/docs/concepts/ingress-xlb#https_tls_between_load_balancer_and_your_application
 https://cloud.google.com/kubernetes-engine/docs/concepts/container-native-load-balancing
