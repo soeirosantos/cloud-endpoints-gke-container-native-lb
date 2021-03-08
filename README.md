@@ -164,6 +164,22 @@ Notice that you test from the `EXTERNAL_IP` still using HTTP. This is because
 when you configure the ESP container with HTTPS you are using TLS only for traffic
 from `LB -> ESP`.
 
+## Troubleshooting
+
+The main problems you may have in this setup are related to the Ingress configuration. You can check the [Google Cloud Troubleshooting page](https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing#troubleshooting).
+
+If the Ingress health check for the https example is consistently showing Unhealthy you may need to create a firewall rule to allow the Google LB to reach the backend.
+
+```bash
+gcloud compute firewall-rules create fw-allow-health-check-and-proxy \
+  --network=NETWORK_NAME \
+  --action=allow \
+  --direction=ingress \
+  --target-tags=GKE_NODE_NETWORK_TAGS \
+  --source-ranges=130.211.0.0/22,35.191.0.0/16 \
+  --rules=tcp:8443
+ ```
+
 ## References
 
 These are some resources that helped me during this experiment:
@@ -173,3 +189,4 @@ https://cloud.google.com/endpoints/docs/openapi/specify-proxy-startup-options
 https://cloud.google.com/endpoints/docs/openapi/configure-endpoints
 https://cloud.google.com/kubernetes-engine/docs/concepts/ingress-xlb#https_tls_between_load_balancer_and_your_application
 https://cloud.google.com/kubernetes-engine/docs/concepts/container-native-load-balancing
+https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing#troubleshooting
