@@ -166,9 +166,9 @@ from `LB -> ESP`.
 
 ## Troubleshooting
 
-The main problems you may have in this setup are related to the Ingress configuration. You can check the [Google Cloud Troubleshooting page](https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing#troubleshooting).
+The main problems you may have in this setup are related to the Ingress configuration. You can check the Google Cloud [troubleshooting page](https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing#troubleshooting) for Container-native load balancing.
 
-If the Ingress health check for the https example is consistently showing Unhealthy you may need to create a firewall rule to allow the Google LB to reach the backend.
+If the Ingress health check for the https example is consistently showing Unhealthy you may need to create a firewall rule to allow the Google LB to reach the backend in the 8443 port used in this example.
 
 ```bash
 gcloud compute firewall-rules create fw-allow-health-check-and-proxy \
