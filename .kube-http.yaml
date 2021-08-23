@@ -92,14 +92,16 @@ spec:
   selector:
     app: esp-echo
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: esp-echo
   annotations:
     kubernetes.io/ingress.global-static-ip-name: esp-echo
 spec:
-  backend:
-    serviceName: esp-echo
-    servicePort: svc-http
+  defaultBackend:
+    service:
+      name: esp-echo
+      port:
+        number: 80
 ---
