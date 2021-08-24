@@ -124,7 +124,7 @@ securityDefinitions:
     # This must match the 'iss' field in the JWT.
     x-google-issuer: "jwt-client.endpoints.sample.google.com"
     # Update this with your service account's email address.
-    x-google-jwks_uri: "https://www.googleapis.com/service_accounts/v1/jwk/YOUR-SERVICE-ACCOUNT-EMAIL"
+    x-google-jwks_uri: "https://www.googleapis.com/service_accounts/v1/jwk/YOUR_SERVICE_ACCOUNT_EMAIL"
     # This must match the "aud" field in the JWT. You can add multiple audiences to accept JWTs from multiple clients.
     x-google-audiences: "echo.endpoints.sample.google.com"
   # This section configures authentication using Google OAuth2 ID Tokens.
@@ -136,23 +136,23 @@ securityDefinitions:
     type: "oauth2"
     x-google-issuer: "https://accounts.google.com"
     x-google-jwks_uri: "https://www.googleapis.com/oauth2/v3/certs"
-    x-google-audiences: "YOUR-CLIENT-ID"
+    x-google-audiences: "YOUR_CLIENT_ID"
   # This section configures authentication using Firebase Auth.
   firebase:
     authorizationUrl: ""
     flow: "implicit"
     type: "oauth2"
-    x-google-issuer: "https://securetoken.google.com/YOUR-PROJECT-ID"
+    x-google-issuer: "https://securetoken.google.com/YOUR_PROJECT_ID"
     x-google-jwks_uri: "https://www.googleapis.com/service_accounts/v1/metadata/x509/securetoken@system.gserviceaccount.com"
-    x-google-audiences: "YOUR-PROJECT-ID"
+    x-google-audiences: "YOUR_PROJECT_ID"
   # This section configures authentication using Auth0 (https://auth0.com).
   auth0_jwk:
-    # Update YOUR-ACCOUNT-NAME with your Auth0 account name.
-    authorizationUrl: "https://YOUR-ACCOUNT-NAME.auth0.com/authorize"
+    # Update YOUR_ACCOUNT_NAME with your Auth0 account name.
+    authorizationUrl: "https://YOUR_ACCOUNT_NAME.auth0.com/authorize"
     flow: "implicit"
     type: "oauth2"
-    x-google-issuer: "https://YOUR-ACCOUNT-NAME.auth0.com/"
+    x-google-issuer: "https://YOUR_ACCOUNT_NAME.auth0.com/"
     # Update this with your service account's email address.
-    x-google-jwks_uri: "https://YOUR-ACCOUNT-NAME.auth0.com/.well-known/jwks.json"
+    x-google-jwks_uri: "https://YOUR_ACCOUNT_NAME.auth0.com/.well-known/jwks.json"
     # Replace with your client ID, found in the Auth0 console.
-    x-google-audiences: "YOUR-CLIENT-ID"
+    x-google-audiences: "YOUR_CLIENT_ID"
